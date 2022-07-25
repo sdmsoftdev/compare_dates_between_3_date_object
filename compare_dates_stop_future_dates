@@ -1,0 +1,43 @@
+
+ function checkDate(sender, args)
+             {
+
+
+           var AdmissionDate = document.getElementById("<%=txtAdmissionDate.ClientID%>").value;
+           var DischargeDate = document.getElementById("<%=txtDischargeDate.ClientID%>").value;
+           var DeliveryDate = document.getElementById("<%=txtDeliveryDate.ClientID%>").value;
+
+           var firstDate = new Date(AdmissionDate.split('/')[2], AdmissionDate.split('/')[1], AdmissionDate.split('/')[0]);
+           var secondDate = new Date(DischargeDate.split('/')[2], DischargeDate.split('/')[1], DischargeDate.split('/')[0]);
+           var thirdDate = new Date(DeliveryDate.split('/')[2], DeliveryDate.split('/')[1], DeliveryDate.split('/')[0]);
+
+             //var Difference = firstDate.getDate() - secondDate.getDate();
+           var Difference = firstDate - secondDate;
+           var Difference2 = firstDate - thirdDate;
+
+             if (sender._selectedDate > new Date()) {
+                    alert("Date selected is beyond today's date, please enter a valid date!");
+                    sender._selectedDate = "";
+                    // set value to empty
+                    sender._textbox.set_Value("")
+                    return false;
+             }
+
+             if (Difference > 0) {
+
+                 alert("Admission date is beyond discharge date");
+                 sender._selectedDate = "";
+                 // set value to empty
+                 sender._textbox.set_Value("")
+
+                 return false;
+           }
+           if (Difference2 > 0) {
+               alert("Admission date is beyond discharge date");
+               sender._selectedDate = "";
+               // set value to empty
+               sender._textbox.set_Value("")
+           }
+             
+             return true;
+         }
